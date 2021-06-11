@@ -344,7 +344,7 @@ void delay_ms(uint16_t count) { HAL_Delay(count); }
 bool isTipDisconnected() {
 
   uint16_t tipDisconnectedThres = TipThermoModel::getTipMaxInC() - 5;
-  uint32_t tipTemp              = TipThermoModel::getTipInC();
+  uint32_t tipTemp              = TipThermoModel::getTipInC(false, false);
   return tipTemp > tipDisconnectedThres;
 }
 

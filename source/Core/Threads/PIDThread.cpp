@@ -43,7 +43,7 @@ void startPIDTask(void const *argument __unused) {
       // This is a call to block this thread until the ADC does its samples
       int32_t x10WattsOut = 0;
       // Do the reading here to keep the temp calculations churning along
-      uint32_t currentTipTempInC = TipThermoModel::getTipInC(true);
+      uint32_t currentTipTempInC = TipThermoModel::getTipInC(true, false);
       PIDTempTarget              = currentTempTargetDegC;
       if (PIDTempTarget) {
         // Cap the max set point to 450C

@@ -68,9 +68,9 @@ void gui_drawTipTemp(bool symbol, const FontStyle font) {
   // Draw tip temp handling unit conversion & tolerance near setpoint
   uint32_t Temp = 0;
   if (systemSettings.temperatureInF) {
-    Temp = TipThermoModel::getTipInF();
+    Temp = TipThermoModel::getTipInF(false, true);
   } else {
-    Temp = TipThermoModel::getTipInC();
+    Temp = TipThermoModel::getTipInC(false, true);
   }
 
   OLED::printNumber(Temp, 3, font); // Draw the tip temp out
@@ -319,37 +319,20 @@ static int gui_SolderingSleepingMode(bool stayOff, bool autoStarted) {
       currentTempTargetDegC = stayOff ? 0 : min(systemSettings.SleepTemp, systemSettings.SolderingTemp);
     }
     // draw the lcd
-    uint16_t tipTemp;
-    if (systemSettings.temperatureInF)
-      tipTemp = TipThermoModel::getTipInF();
-    else {
-      tipTemp = TipThermoModel::getTipInC();
-    }
-
     OLED::clearScreen();
     OLED::setCursor(0, 0);
     if (systemSettings.detailedSoldering) {
       OLED::print(translatedString(Tr->SleepingAdvancedString), FontStyle::SMALL);
       OLED::setCursor(0, 8);
       OLED::print(translatedString(Tr->SleepingTipAdvancedString), FontStyle::SMALL);
-      OLED::printNumber(tipTemp, 3, FontStyle::SMALL);
-      if (systemSettings.temperatureInF)
-        OLED::print(SymbolDegF, FontStyle::SMALL);
-      else {
-        OLED::print(SymbolDegC, FontStyle::SMALL);
-      }
+      gui_drawTipTemp(true, FontStyle::SMALL);
 
       OLED::print(SymbolSpace, FontStyle::SMALL);
       printVoltage();
       OLED::print(SymbolVolts, FontStyle::SMALL);
     } else {
       OLED::print(translatedString(Tr->SleepingSimpleString), FontStyle::LARGE);
-      OLED::printNumber(tipTemp, 3, FontStyle::LARGE);
-      if (systemSettings.temperatureInF)
-        OLED::drawSymbol(0);
-      else {
-        OLED::drawSymbol(1);
-      }
+      gui_drawTipTemp(true, FontStyle::LARGE);
     }
 
     OLED::refresh();
@@ -638,7 +621,7 @@ static void gui_solderingMode(uint8_t jumpToSleep) {
       }
     }
     // Update LED status
-    int error = currentTempTargetDegC - TipThermoModel::getTipInC();
+    int error = currentTempTargetDegC - TipThermoModel::getTipInC(false, false);
     if (error >= -10 && error <= 10) {
       // converged
       setStatusLED(LED_HOT);
@@ -688,7 +671,7 @@ void showDebugMenu(void) {
       break;
     case 7:
       // Temp in C
-      OLED::printNumber(TipThermoModel::getTipInC(), 5, FontStyle::SMALL);
+      OLED::printNumber(TipThermoModel::getTipInC(false, false), 5, FontStyle::SMALL);
       break;
     case 8:
       // Handle Temp
@@ -871,7 +854,7 @@ void startGUITask(void const *argument __unused) {
 
     currentTempTargetDegC = 0; // ensure tip is off
     getInputVoltageX10(systemSettings.voltageDiv, 0);
-    uint32_t tipTemp = TipThermoModel::getTipInC();
+    uint32_t tipTemp = TipThermoModel::getTipInC(false, false);
     if (tipTemp > 55) {
       setStatusLED(LED_COOLING_STILL_HOT);
     } else {

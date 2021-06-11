@@ -69,7 +69,7 @@ uint32_t TipThermoModel::convertFtoC(uint32_t degF) {
   }
   return ((degF - 32) * 5) / 9;
 }
-uint32_t TipThermoModel::getTipInC(bool sampleNow) {
+uint32_t TipThermoModel::getTipInC(bool sampleNow, bool latch) {
   int32_t currentTipTempInC = TipThermoModel::convertTipRawADCToDegC(getTipRawTemp(sampleNow));
   currentTipTempInC += getHandleTemperature() / 10; // Add handle offset
                                                     // Power usage indicates that our tip temp is lower than our thermocouple temp.
@@ -82,11 +82,18 @@ uint32_t TipThermoModel::getTipInC(bool sampleNow) {
 #endif
   if (currentTipTempInC < 0)
     return 0;
+  if (latch) {
+    // If we are within 5C of the setpoint, latch to setpoint
+    int delta = currentTempTargetDegC - currentTipTempInC;
+    if (delta > -5 && delta < 5) {
+      currentTipTempInC = currentTempTargetDegC;
+    }
+  }
   return currentTipTempInC;
 }
 
-uint32_t TipThermoModel::getTipInF(bool sampleNow) {
-  uint32_t currentTipTempInF = getTipInC(sampleNow);
+uint32_t TipThermoModel::getTipInF(bool sampleNow, bool latch) {
+  uint32_t currentTipTempInF = getTipInC(sampleNow, latch);
   currentTipTempInF          = convertCtoF(currentTipTempInF);
   return currentTipTempInF;
 }

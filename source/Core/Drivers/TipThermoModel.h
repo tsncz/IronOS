@@ -12,8 +12,8 @@
 class TipThermoModel {
 public:
   // These are the main two functions
-  static uint32_t getTipInC(bool sampleNow = false);
-  static uint32_t getTipInF(bool sampleNow = false);
+  static uint32_t getTipInC(bool sampleNow ,bool latch);
+  static uint32_t getTipInF(bool sampleNow ,bool latch);
 
   // Calculates the maximum temperature can can be read by the ADC range
   static uint32_t getTipMaxInC();
