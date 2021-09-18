@@ -45,19 +45,19 @@
     "SettingStartSolderingChar": "P",
     "SettingStartSleepChar": "S",
     "SettingStartSleepOffChar": "M",
-    "SettingSensitivityOff": "O",
-    "SettingSensitivityLow": "L",
-    "SettingSensitivityMedium": "M",
-    "SettingSensitivityHigh": "H",
-    "SettingLockDisableChar": "D",
+    "SettingSensitivityOff": "0",
+    "SettingSensitivityLow": "N",
+    "SettingSensitivityMedium": "S",
+    "SettingSensitivityHigh": "V",
+    "SettingLockDisableChar": "V",
     "SettingLockBoostChar": "B",
-    "SettingLockFullChar": "F",
+    "SettingLockFullChar": "Z",
     "SettingNAChar": "N/A"
   },
   "menuGroups": {
     "PowerMenu": {
-      "text2": ["Power", "settings"],
-      "desc": "Power settings"
+      "text2": ["Nastavení", "napájení"],
+      "desc": "Nastavení napájení"
     },
     "SolderingMenu": {
       "text2": ["Pájecí", "nastavení"],
@@ -139,15 +139,15 @@
     },
     "ScrollingSpeed": {
       "text2": ["Rychlost", "popisků"],
-      "desc": "Rychlost posuvu popisků podobných tomuto (P=Pomalu | R=Rychle)"
+      "desc": "Rychlost posuvu popisků podobných tomuto. (P=Pomalu | R=Rychle)"
     },
     "QCMaxVoltage": {
       "text2": ["Výkon", "ve wattech"],
       "desc": "Výkon použítého napájecího adaptéru ve wattech."
     },
     "PDNegTimeout": {
-      "text2": ["PD", "timeout"],
-      "desc": "PD negotiation timeout in 100ms steps for compatibility with some QC chargers (0: disabled)"
+      "text2": ["PD", "čas. limit"],
+      "desc": "Časový limit pro vyjednání PD kvůli kompatibilitě se staršími adaptéry/powerbankami. (0: vypnuto)"
     },
     "PowerLimit": {
       "text2": ["Omezení", "Výkonu"],
@@ -166,48 +166,48 @@
       "desc": "Velikost skoku při změně teploty dlouhým stiskem tlačítka!"
     },
     "PowerPulsePower": {
-      "text2": ["Intenzita", "Výkon. pulsu"],
+      "text2": ["Intenzita", "výkon. pulsu"],
       "desc": "Puls pro udržení zařízení v chodu (kvůli power bankám)."
     },
     "HallEffSensitivity": {
-      "text2": ["Hall Eff", "Sensitivity"],
-      "desc": "Sensitivity of the Hall effect sensor in detecting sleep (O=Off | L=Low | M=Medium | H=High)"
+      "text2": ["Citlivost", "Hallova senzoru"],
+      "desc": "Citlivost Hallova senzoru při detekci spánku (0=Vypnout | N=Nízká | S=Střední | V=Vysoká)"
     },
     "LockingMode": {
-      "text2": ["Allow buttons", "locking"],
-      "desc": "When soldering, long press on both buttons lock them (D=Disable | B=Boost only | F=Full locking)"
+      "text2": ["Zámek", "tlačítek"],
+      "desc": "Během pájení stiskněte obě tlačítka pro uzamknutí. (0=Vypnout | B=Pouze boost | Z=Zamknout vše)"
     },
     "MinVolCell": {
-      "text2": ["Minimum", "voltage"],
-      "desc": "Minimum allowed voltage per cell (3S: 3 - 3,7V | 4-6S: 2,4 - 3,7V)"
+      "text2": ["Minimální", "napětí"],
+      "desc": "Minimální povolené napětí na každý článek. (3S: 3 - 3,7V | 4-6S: 2,4 - 3,7V)"
     },
     "AnimLoop": {
-      "text2": ["Anim.", "loop"],
-      "desc": "Loop icon animations in root menu"
+      "text2": ["Animace", "ve smyčce"],
+      "desc": "Zobrazit animace ve smyčce v hlavním menu."
     },
     "AnimSpeed": {
-      "text2": ["Anim.", "speed"],
-      "desc": "Speed of icon animations in menu (O=off | L=low | M=medium | H=high)"
+      "text2": ["Rych.", "animací"],
+      "desc": "Rychlost animací v menu. (0=Vypnout | N=Nízká | S=Střední | V=Vysoká)"
     },
     "PowerPulseWait": {
-      "text2": ["Power pulse", "wait time"],
-      "desc": "Time to wait before triggering every keep-awake pulse (x 2,5s)"
+      "text2": ["Prodleva", "výkon. pulsu"],
+      "desc": "Doba mezi pulsy pro udržení zařízení v chodu. (x 2,5s)."
     },
     "PowerPulseDuration": {
-      "text2": ["Power pulse", "duration"],
-      "desc": "Keep-awake-pulse duration (x 250ms)"
+      "text2": ["Délka", "výkon. pulsu"],
+      "desc": "Délka pulsu pro udržení zařízení v chodu. (x 250ms)."
     },
     "LanguageSwitch": {
       "text2": ["Řeč:", " CS       Český"],
       "desc": ""
     },
     "Brightness": {
-      "text2": ["Screen", "Brightness"],
-      "desc": "Adjust the contrast/brightness of the OLED screen"
+      "text2": ["Jas", "displeje"],
+      "desc": "Upravit jas/kontrast OLED displeje."
     },
     "ColourInversion": {
-      "text2": ["Screen", "Invert"],
-      "desc": "Invert the colours of the OLED screen"
+      "text2": ["Invertovat", "barvy"],
+      "desc": "Invertovat barvy OLED displeje."
     }
   }
 }
